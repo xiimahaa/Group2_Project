@@ -1,75 +1,57 @@
 # SIYAQ: Sentiment Analysis and Linguistic Challenge Evaluation
 
-This project investigates sentiment classification using two different approaches:
+SIYAQ compares two sentiment classification approaches and evaluates how they handle **contrastive language** and **negation**.
 
-- **TF-IDF + Logistic Regression**
-- **all-MiniLM-L6-v2 Sentence Embeddings + Logistic Regression**
+## 🔍 Models
 
-The models are evaluated on the overall test set and on challenging linguistic subsets, including **contrastive language** and **negation**.
-
----
+- **TF-IDF + Logistic Regression** — a traditional word-based representation.
+- **all-MiniLM-L6-v2 + Logistic Regression** — pretrained sentence embeddings with a Logistic Regression classifier.
 
 ## 📁 Repository Contents
 
-- `SIYAQFINAL.ipynb` - Complete implementation and evaluation
-- `sentiment+labelled+sentences.zip` - Dataset used in the project
+- `SIYAQFINAL.ipynb` — complete implementation, evaluation, error analysis, and interactive prediction cell.
+- `sentiment+labelled+sentences.zip` — dataset used in the project.
 
----
+## 📊 Results
 
-## Models
+### Overall Test Set
 
-### 1. TF-IDF + Logistic Regression
-
-A traditional machine learning baseline using TF-IDF text features with Logistic Regression.
-
-### 2. MiniLM + Logistic Regression
-
-Uses pretrained **all-MiniLM-L6-v2** sentence embeddings combined with Logistic Regression.
-
----
-
-## 📊 Final Results
-
-| Model | Overall Accuracy | Overall Macro F1 |
+| Model | Accuracy | Macro F1 |
 |---|---:|---:|
-| **TF-IDF + LR** | **0.8202** | **0.8202** |
-| **MiniLM + LR** | **0.8674** | **0.8673** |
+| TF-IDF + Logistic Regression | 0.8202 | 0.8202 |
+| MiniLM + Logistic Regression | **0.8674** | **0.8673** |
 
-### 🔍 Linguistic Challenge Evaluation
+### Linguistic Challenge Subsets
 
 | Model | Contrastive Accuracy | Contrastive Macro F1 | Negation Accuracy | Negation Macro F1 |
 |---|---:|---:|---:|---:|
-| **TF-IDF + LR** | 0.6111 | 0.6000 | 0.7326 | 0.6434 |
-| **MiniLM + LR** | **0.7778** | **0.7662** | **0.8023** | **0.7574** |
+| TF-IDF + Logistic Regression | 0.6111 | 0.6000 | 0.7326 | 0.6434 |
+| MiniLM + Logistic Regression | **0.7778** | **0.7662** | **0.8023** | **0.7574** |
 
----
+**Key finding:** MiniLM achieved higher Accuracy and Macro F1 than TF-IDF across the overall test set and both linguistic challenge subsets.
 
-## Key Findings
+**Subset sizes:** 18 verified contrastive examples and 86 negation examples. Only 4 examples contained both contrast and negation, so no separate overlap performance analysis was conducted.
 
-- **MiniLM + Logistic Regression achieved the best overall performance**, with an accuracy of **86.74%**.
-- MiniLM performed better than TF-IDF on both linguistic challenge subsets.
-- The **contrastive subset contains 18 verified examples**, where MiniLM achieved **77.78% accuracy** compared with **61.11%** for TF-IDF.
-- The **negation subset contains 86 examples**, where MiniLM achieved **80.23% accuracy** compared with **73.26%** for TF-IDF.
-- Both linguistic phenomena remain challenging for the models compared with their overall performance.
+## 🛠️ Environment and Requirements
 
-> **Note:** Only 4 verified examples contained both contrast and negation. Because this overlap subset is very small, no separate performance analysis was conducted.
-
----
-
-## 🛠️ Technologies Used
-
-- Python
-- Pandas
-- Scikit-learn
-- Sentence Transformers
-- Hugging Face Transformers
-- Logistic Regression
-
----
+- **Environment:** Jupyter Notebook
+- **Python:** 3.10.18 (notebook environment)
+- **Main libraries:** pandas, NumPy, scikit-learn, matplotlib, and sentence-transformers.
+- The Setup section installs `sentence-transformers` and displays the installed package versions when the notebook is run.
+- An internet connection is required the first time the pretrained `all-MiniLM-L6-v2` model is downloaded from Hugging Face.
 
 ## ▶️ How to Run
 
-1. Clone the repository.
-2. Install the required Python libraries.
-3. Open `SIYAQFINAL.ipynb`.
-4. Run the notebook cells in order.
+1. Clone or download this repository.
+2. Keep `SIYAQFINAL.ipynb` and `sentiment+labelled+sentences.zip` in the same folder.
+3. Open `SIYAQFINAL.ipynb` in Jupyter Notebook.
+4. Run the notebook from top to bottom. The Setup section installs the required sentence-transformers package and extracts the dataset ZIP automatically.
+5. To test a new review, edit the text in the **Try it** section and run that cell. It displays predictions from both models without retraining. Empty input is handled.
+
+## 📚 Sources
+
+- **Dataset:** [UCI Sentiment Labelled Sentences](https://archive.ics.uci.edu/dataset/331/sentiment+labelled+sentences)
+- **Pretrained model:** [Sentence Transformers — all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+- **Sentence Transformers documentation:** [sbert.net](https://www.sbert.net/)
+- **Scikit-learn documentation:** [scikit-learn.org](https://scikit-learn.org/stable/)
+
